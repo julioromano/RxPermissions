@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.kjulio.rxpermissions">
+
+    <application>
+        <activity
+            android:name=".internal.PermissionsActivity"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+            android:noHistory="true"
+            android:theme="@style/InvisibleActivityTheme" />
+    </application>
+
+</manifest>
