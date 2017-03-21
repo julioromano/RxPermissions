@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'jacoco-android'
 
 android {
     compileSdkVersion 25
@@ -17,20 +16,12 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+            shrinkResources false
         }
         debug {
-            minifyEnabled true
-            // setting shrinkResources false causes the following error while running androidTests:
-            //
-            // A problem was found with the configuration of task ':rxpermissions:packageDebugAndroidTest'.
-            // > File './RxPermissions/rxpermissions/build/intermediates/res/resources-debug-androidTest-stripped.ap_'
-            // specified for property 'resourceFile' does not exist.
-            //
+            minifyEnabled false
             shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testCoverageEnabled = true
         }
     }
@@ -58,26 +49,20 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'io.reactivex.rxjava2:rxjava:2.0.7'
 
-    testCompile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.7.18'
-    testCompile "org.robolectric:robolectric:3.3.1"
-
-    androidTestCompile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    androidTestCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 
 }
 
-group = 'net.kjulio.RxPermissions'
-version = '1.0.0-beta1'
+group = 'net.kjulio.rxpermissions'
+version = '1.0.0'
 
 bintray {
     user = System.getenv('BINTRAY_USER')
     key = System.getenv('BINTRAY_KEY')
     pkg {
-        repo = 'RxPermissions'
-        name = 'RxPermissions'
+        repo = 'maven'
+        name = 'rxpermissions'
 
         version {
             name = project.version

@@ -5,11 +5,11 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-25.0.0
+    - build-tools-25.0.2
     - android-25
     - extra-android-m2repository # required when using android support library
-    - extra-google-m2repository # required when using play services
+    - sys-img-armeabi-v7a-android-25
 script:
-  - ./gradlew build jacocoTestReport
+  - ./gradlew build connectedCheck
 after_success:
   - bash <(curl -s https://codecov.io/bash)

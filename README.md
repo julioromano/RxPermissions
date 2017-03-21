@@ -11,13 +11,17 @@ Add this to your module's build.gradle:
 
 ```groovy
 dependencies {
-    compile 'net.kjulio.RxPermissions:rxpermissions:1.0.0-beta1'
+    compile 'net.kjulio.rxpermissions:rxpermissions:1.0.0'
 }
 ```
 
 ## Usage
 
-TODO
+```java
+RxPermissions.with(context)
+     .requestPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
+     .subscribe(...);
+```
 
 ## License
 

@@ -2,8 +2,7 @@ package net.kjulio.rxpermissions.internal;
 
 import android.content.Context;
 
-import net.kjulio.rxpermissions.PermissionsDeniedException;
-import net.kjulio.rxpermissions.PermissionsResult;
+import net.kjulio.rxpermissions.PermissionDeniedException;
 import net.kjulio.rxpermissions.RxPermissions;
 
 import io.reactivex.Completable;
@@ -22,23 +21,20 @@ public class RxPermissionsImpl extends RxPermissions {
         return Completable.create(new CompletableOnSubscribe() {
             @Override
             public void subscribe(final CompletableEmitter e) throws Exception {
-                if (PermissionsActivity.checkPermissions(context, permissions).allGranted()) {
-                    e.onComplete();
-                } else {
-                    PermissionsActivity.requestPermissions(context, permissions, new PermissionsListener() {
-                        @Override
-                        public void onPermissionsDialogDismissed() {
-                            PermissionsResult result =
-                                    PermissionsActivity.checkPermissions(context, permissions);
-                            if (result.allGranted()) {
-                                e.onComplete();
-                            } else {
-                                e.onError(new PermissionsDeniedException(result));
-                            }
-                        }
-                    });
-                }
+                PermissionsRequest request = new PermissionsRequest(permissions, new PermissionsRequest.Callback() {
+                    @Override
+                    public void onPermissionGranted() {
+                        e.onComplete();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(int[] grantResults) {
+                        e.onError(new PermissionDeniedException(grantResults));
+                    }
+                });
+                request.execute(context);
             }
         });
     }
+
 }

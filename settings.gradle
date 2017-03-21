@@ -1,1 +1,3 @@
 include ':rxpermissions'
+
+rootProject.name = 'RxPermissions'
