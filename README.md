@@ -22,6 +22,7 @@ RxPermissions.with(context)
      .requestPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
      .subscribe(...);
 ```
+Don't forget to also add the same permissions to the app's manifest.
 
 ## License
 
