@@ -51,6 +51,7 @@ public class RxPermissionsTest {
             e.printStackTrace();
         }
         TestUtils.clickPermissionsDialog(uiDevice, false);
+        testObserver.awaitTerminalEvent();
         testObserver.assertError(PermissionDeniedException.class);
     }
 
@@ -63,6 +64,7 @@ public class RxPermissionsTest {
             e.printStackTrace();
         }
         TestUtils.clickPermissionsDialog(uiDevice, true);
+        testObserver.awaitTerminalEvent();
         testObserver.assertComplete();
     }
 
